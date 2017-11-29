@@ -1,0 +1,5 @@
+!.keepdir
+!.travis.yml
+var/log/*
+var/tmp/*
+vendor/
