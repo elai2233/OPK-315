@@ -88,7 +88,7 @@ function isEqual(imp1, imp2) {
 }
 var TVs = []; // массив телевизоров
 var n = +prompt("Enter a number of TVs:"); //ввод количества телевизоров, <2*105
-//+ перем промтом - явное преобразование в числовое значение. нужно число, а промпт возвращает строку
+
 while (n <= 0 || n > 109) {
     n = +prompt("Number of TVs should be more then 0 and less then 110. Re-enter:");
 }
