@@ -1,0 +1,4 @@
+*.html
+*.css
+!gonduras star.html
+!gonduras star_css.css
