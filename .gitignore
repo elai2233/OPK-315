@@ -4,3 +4,4 @@ OPK-315.iml
 *.kotlin_module
 out/
 ~
+~$*.doc*
