@@ -1,5 +1,3 @@
-package com.ukrlogic.tgclient.telegram;
-
 /**
  * Created by Vladislav Rudev on 12/15/2017.
  */
