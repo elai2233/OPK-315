@@ -1,0 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include "iostream"
+#include <time.h>
+using namespace std;
+void main()
+{
+	srand(time(0));
+	setlocale(LC_ALL, "Russian");
+	int n,dlina=0,dlina1;
+	n = 1 + rand() % 210;
+	cout << " Входные данные:" << endl;
+	cout << n << endl;
+    //n = 5; //запустить для проверки
+	int *li = new int[n]; // Начало работы. Каждый элемент это отрезок времени под каждый телевизор
+	int *ri = new int[n]; // Конец работы.
+	for (int i = 0; i < n; i++)
+	{
+		ri[i]= 1 + rand() % 109; // вписываем когда телевизор выключается. нулевой отрезок был убран специально - телевизор не может быть выключенным, если он даже не включался. Это как минимум нелогично.
+		li[i] = 0 + rand() % ri[i]; // вписываем когда телевизор включается.
+		cout << li[i] << " " << ri[i] << endl;
+	}
+	cout << " Выходные данные:" << endl;
+	for (int i = 0; i < n; i++) // один цикл это проверка одного телевизора
+	{
+		dlina = ri[i] - li[i]+1; // разниця времен одного телека.
+		int *vremmas = new int[dlina];
+		for (int k = 0,g=li[i]; g <= ri[i]; k++,g++) // вписать каждый отрезок времени одного телека в массив.
+		{
+			vremmas[k] = g; 
+		}
+		for (int j=0;j<n;j++)
+		{
+			if (j == i) j = j + 1;
+			dlina1 = ri[j] - li[j] + 1; // разниця времен второго телека.
+			int *vremmas2 = new int[dlina1];
+			for (int k = 0, g = li[j]; g <= ri[j]; k++, g++)// вписать каждый отрезок времени второго телека в массив.
+			{
+				vremmas2[k] = g;
+			}
+			for (int t=0;t<dlina;t++) // сверяем массивы телевизоров с массивом i-телевизора. Если если одинаковые по значению ячейки, значит значение этой ячейки ( что у массива i-телевизора) меняем на -1.
+			{
+				for (int yuy=0;yuy<dlina1; yuy++)
+					if (vremmas[t] == vremmas2[yuy])
+					{
+						vremmas[t] = -1;
+						break;
+				}
+			}
+			delete vremmas2;
+		}
+		for (int yuy = 0, k = dlina; yuy <= k; yuy++) // Проверяем можно ли выключить телевизор. Если в каждой ячейки написано -1, то можно выключить. Иначе, начинаем новый цикл и новую жизнь. 
+		{
+			if (vremmas[yuy] == -1)
+			{
+				dlina--;
+			}
+		}
+		if (dlina == 0)
+		{
+			cout << "Ответ: " << i + 1 << endl;
+			break;
+		}
+		delete vremmas;
+	}
+	if (dlina!=0) // если нельзя ничего выключить.
+	{
+		cout <<"Ответ " <<"-1" << endl;
+	}
+}
